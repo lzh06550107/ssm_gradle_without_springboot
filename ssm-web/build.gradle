@@ -1,0 +1,39 @@
+plugins {
+    id 'war'
+}
+
+apply plugin: 'com.bmuschko.tomcat'
+
+dependencies {
+    implementation project(':ssm-service')
+    api 'org.springframework:spring-webmvc'
+    api 'org.springframework:spring-tx'
+    api 'org.springframework:spring-jdbc'
+    providedCompile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
+    implementation "javax.servlet:jstl:${JSTL_VERSION}"
+    implementation "commons-io:commons-io:${COMMONS_IO_VERSION}"
+    implementation "commons-fileupload:commons-fileupload:${COMMONS_FILEUPLOAD_VERSION}"
+
+    def tomcatVersion = '8.0.42'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+tomcat {
+    httpPort = 8080
+    contextPath = '/'
+    users {
+        user {
+            username = 'user1'
+            password = '123456'
+            roles = ['developers', 'admin']
+        }
+
+        user {
+            username = 'user2'
+            password = 'abcdef'
+            roles = ['manager']
+        }
+    }
+}

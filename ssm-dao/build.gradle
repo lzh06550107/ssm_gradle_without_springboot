@@ -1,0 +1,13 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(':ssm-pojo')
+
+    implementation "org.mybatis:mybatis:${MYBATIS_VERSION}"
+    implementation "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+    implementation "mysql:mysql-connector-java:${MYSQL_CONNECTOR_VERSION}"
+    implementation "com.github.pagehelper:pagehelper:${PAGEHELPER_VERSION}"
+    implementation "com.alibaba:druid:${DRUID_VERSION}"
+}

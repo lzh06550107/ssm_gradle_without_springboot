@@ -1,0 +1,55 @@
+buildscript {
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenCentral()
+        jcenter()
+    }
+
+    group = 'cn.liaozhonghao.www'
+    version = '1.0-SNAPSHOT'
+}
+
+subprojects {
+
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework:spring-framework-bom:4.3.26.RELEASE'
+        }
+        dependencies {
+
+        }
+    }
+
+    dependencies {
+
+        implementation "org.slf4j:slf4j-api:${SLF4J_VERSION}"
+        implementation "org.slf4j:slf4j-log4j12:${SLF4J_VERSION}"
+        implementation "log4j:log4j:${LOG4J_VERSION}"
+
+        implementation "com.google.code.gson:gson:${GSON_VERSION}"
+        implementation "org.apache.commons:commons-lang3:${COMMONS_LANG3_VERSION}"
+        testImplementation "junit:junit:${JUNIT_VERSION}"
+    }
+}

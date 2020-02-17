@@ -1,0 +1,10 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(':ssm-dao')
+
+    api 'org.springframework:spring-context'
+
+}
